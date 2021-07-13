@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         settingsButton = findViewById(R.id.settingsButton);
-
+        playButton = findViewById(R.id.playButton);
         /*
             This is the onClickListener that allows us to bind the navigation
             button to the function. The function will take the user to the settings
