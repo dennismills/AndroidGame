@@ -10,7 +10,6 @@
     <string name="sixteenBySixteen">16 x 16</string>
     <string name="twentyFourByTwentyFour">24 x 24</string>
     
-    <string name="app_name">Flood It</string>
     <string name="num_turns_label">Turns Remaining:</string>
     <string name="tot_turns_label">Turns Allotted:</string>
     <string name="grid_size_label">Current Board Size:</string>
