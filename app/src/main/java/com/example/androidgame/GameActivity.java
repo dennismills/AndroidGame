@@ -1,4 +1,4 @@
-package ucdenver.sarahmorgan.myapplication;
+package com.example.androidgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
