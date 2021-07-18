@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <color name ="gridGreen">#FF00D500</color>
+    <color name ="gridBlue">#FF0C0CC0</color>
+    <color name ="gridYellow">#FFFFF700</color>
+    <color name ="gridRed">#FFFF0000</color>
 </resources>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <TextView
+        android:id="@+id/numTurnsDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="20dp"
+        android:text="#Turns"
+        app:layout_constraintBottom_toTopOf="@+id/totTurnsLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/numTurnsLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/numTurnsLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/num_turns_label"
+        app:layout_constraintBottom_toTopOf="@+id/totTurnsLabel"
+        app:layout_constraintEnd_toStartOf="@+id/numTurnsDisplay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/totTurnsDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="20dp"
+        android:text="#Turns"
+        app:layout_constraintBottom_toTopOf="@+id/BoardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/totTurnsLabel"
+        app:layout_constraintTop_toBottomOf="@+id/numTurnsLabel" />
+
+    <TextView
+        android:id="@+id/totTurnsLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/tot_turns_label"
+        app:layout_constraintBottom_toTopOf="@+id/BoardView"
+        app:layout_constraintEnd_toStartOf="@+id/totTurnsDisplay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numTurnsLabel" />
+
+    <Button
+        android:id="@+id/blueButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="600dp"
+        android:backgroundTint="@color/gridBlue"
+        app:iconTint="@color/gridBlue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/greenButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="600dp"
+        android:backgroundTint="@color/gridGreen"
+        app:layout_constraintStart_toEndOf="@+id/blueButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/redButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="600dp"
+        android:backgroundTint="@color/gridRed"
+        app:layout_constraintStart_toEndOf="@+id/greenButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/yellowButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="102dp"
+        android:backgroundTint="@color/gridYellow"
+        app:layout_constraintStart_toEndOf="@+id/redButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gridSizeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/grid_size_label"
+        app:layout_constraintBottom_toTopOf="@+id/blueButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BoardView" />
+
+    <TextView
+        android:id="@+id/gridSizeDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
+        android:text="#gridSize"
+        app:layout_constraintBottom_toTopOf="@+id/blueButton"
+        app:layout_constraintStart_toEndOf="@+id/gridSizeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/BoardView" />
+
+    <com.example.androidgame.BoardView
+        android:id="@+id/BoardView"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/gridSizeLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totTurnsLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
