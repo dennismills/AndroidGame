@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AndroidGame</string>
+    <string name="playButton">Play</string>
+    <string name="settingsButton">Settings</string>
+    <string name="quitButton">Quit</string>
+    <string name="settingsHeader">Settings</string>
+    <string name="returnToMainMenuButton">Return To Main Menu</string>
+    <string name="gridSizeHeader">Grid Size</string>
+    <string name="tenByTen">10 x 10</string>
+    <string name="sixteenBySixteen">16 x 16</string>
+    <string name="twentyFourByTwentyFour">24 x 24</string>
+    
+    <string name="num_turns_label">Turns Remaining:</string>
+    <string name="tot_turns_label">Turns Allotted:</string>
+    <string name="grid_size_label">Current Board Size:</string>
+</resources>
