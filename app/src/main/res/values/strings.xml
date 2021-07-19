@@ -13,4 +13,12 @@
     <string name="num_turns_label">Turns Remaining:</string>
     <string name="tot_turns_label">Turns Allotted:</string>
     <string name="grid_size_label">Current Board Size:</string>
+    
+    <string name="action_startmenu">Return to Start Menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_playgame">Play Game</string>
+
+    <string name="resize_warning">Warning</string>
+    <string name="resize_warning_message">If you change the board size, any game in progress will be reset.</string>
+    <string name="ok">Okay</string>
 </resources>
