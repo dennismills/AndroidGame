@@ -7,8 +7,8 @@
     <string name="returnToMainMenuButton">Return To Main Menu</string>
     <string name="gridSizeHeader">Grid Size</string>
     <string name="tenByTen">10 x 10</string>
-    <string name="sixteenBySixteen">16 x 16</string>
-    <string name="twentyFourByTwentyFour">24 x 24</string>
+    <string name="fourteenByFourteen">14 x 14</string>
+    <string name="eighteenByEighteen">18 x 18</string>
     
     <string name="num_turns_label">Turns Remaining:</string>
     <string name="tot_turns_label">Turns Allotted:</string>
