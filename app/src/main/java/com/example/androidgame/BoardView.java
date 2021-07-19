@@ -36,18 +36,18 @@ public class BoardView extends View { //Custom View Class
     public BoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
         int x; //Upper left-hand corner x-coordinate
-        int y = 10; //Upper right-hand corner y-coordinate
-        //Default width and height (60 * 14 = 840):
-        int width = 60;
-        int height = 60;
+        int y = 0; //Upper right-hand corner y-coordinate
+        //Default width and height (84 * 10 = 840):
+        int width = 84;
+        int height = 84;
 
-        if (gridSize == 10) { // 840 / 10 = 84
-            width = 84;
-            height = 84;
-        } else if (gridSize == 18) { //840 / 18 = 47
+        if (gridSize == 14) { // 840 / 14 = 60
+            width = 60;
+            height = 60;
+        }
+        else if (gridSize == 18) { //840 / 18 = 47
             width = 47;
             height = 47;
-        } else { //Do nothing; gridSize is default 14
         }
 
         for (int i = 0; i < gridSize; i++) {
@@ -76,7 +76,6 @@ public class BoardView extends View { //Custom View Class
                 drawable.setBounds(x, y, x + width, y + height);
                 //Add square to the 2D ArrayList:
                 floodGrid.get(i).add(j, drawable);
-                //Log.d("Colors on board", "Row, column, randNum: " + i + ", " + j + ", " + randNum); //Debugging
             }
         }
     }
@@ -90,18 +89,17 @@ public class BoardView extends View { //Custom View Class
         floodGrid.clear(); //Clear the existing grid
 
         int x; //Upper left-hand corner x-coordinate
-        int y = 10; //Upper right-hand corner y-coordinate
-        //Default width and height (60 * 14 = 840):
-        int width = 60;
-        int height = 60;
+        int y = 0; //Upper right-hand corner y-coordinate
+       //Default width and height (60 * 14 = 840):
+        int width = 84;
+        int height = 84;
 
-        if (gridSize == 10) { // 840 / 10 = 84
-            width = 84;
-            height = 84;
+        if (gridSize == 14) { // 840 / 14 = 60
+            width = 60;
+            height = 60;
         } else if (gridSize == 18) { //840 / 18 = 47
             width = 47;
             height = 47;
-        } else { //Do nothing; gridSize is default 14
         }
 
         for (int i = 0; i < gridSize; i++) {
@@ -140,8 +138,7 @@ public class BoardView extends View { //Custom View Class
         String color = Integer.toHexString(colorInt);
         color = color.toUpperCase();
         color = "#" + color;
-        //Log.d("getSquareColor", "Color:" + color + ", at: " + row + ", " + column); //Debugging
-        return color; //Change return type to string
+        return color;
     }
 
     public void setSquareColor(int row, int column, String newColor) { //Function to set the square color for any given square
@@ -154,10 +151,9 @@ public class BoardView extends View { //Custom View Class
 
     public boolean detColorMatch(int row, int column, String color) { //Function to determine if the given color [flood color] matches the color of a given square
         if (getSquareColor(row, column).equals(color)) {
-            //Log.d("detColorMatch", "Value Ret is true"); //Debugging
             return true;
-        } else {
-            //Log.d("detColorMatch", "Value Ret is false"); //Debugging
+        } 
+        else {
             return false;
         }
     }
