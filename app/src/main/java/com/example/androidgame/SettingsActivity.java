@@ -1,21 +1,32 @@
 package com.example.androidgame;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 public class SettingsActivity extends AppCompatActivity
 {
-
-    private Button returnToMainMenuButton; // The variable to hold a reference to the navigation button
     private RadioGroup gridSizeSelection; // This is a variable to hold a reference to the grid radio group
-    private int gridSize = 10; // Defaults to a 10 x 10 sized grid each time the game starts
+    SharedPreferences sharedPref; // Shared preferences object
+    SharedPreferences.Editor editor; //Shared preferences editor object
 
     /*
         TODO: Add the color changing options
@@ -28,26 +39,12 @@ public class SettingsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        returnToMainMenuButton = findViewById(R.id.returnToMainMenuButton); // Gets the reference for the navigation button
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPref.edit();
 
-        /*
-            This is the onClickListener that allows us to bind the navigation
-            button to the function. The function will return the user back to
-            the main activity.
-        */
-        returnToMainMenuButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                /*
-                    Creates an intent for the activity that we want to navigate to.
-                    This will effectively take us back to the main menu.
-                */
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(intent); // Launches the activity and takes us back
-            }
-        });
+        // Show dialog warning user that resizing will result in any game being played being reset:
+        ResizeWarningDialog dialog = new ResizeWarningDialog();
+        dialog.show(getSupportFragmentManager(), "");
 
         gridSizeSelection = findViewById(R.id.gridSizeRadioGroup); // Gets the reference for the radio group
 
@@ -56,13 +53,16 @@ public class SettingsActivity extends AppCompatActivity
             radio button change. It will then take the new button that we clicked
             and it will apply the change to the grid.
         */
+
         gridSizeSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
                 /*
-                    TODO: It may be nice to add a dialog fragment here so that
+                    TODO: Only warn user about resetting the board size if a game is in progress.
+
+                    It may be nice to add a dialog fragment here so that
                     the user is given a warning that they will lose their current
                     game progress if they choose to change the grid size mid game.
 
@@ -80,18 +80,50 @@ public class SettingsActivity extends AppCompatActivity
                 RadioButton checkedButton = findViewById(checkedId); // Gets the current radio button
                 if (checkedButton.getText().equals("10 x 10")) // Checks if it was the 10 x 10 button
                 {
-                    gridSize = 10; // Sets the grid size to 10
+                    // Save the gridSize as a shared preference to the default XML file:
+                    editor.putInt("gridSize", 10);
+                    editor.commit();
+
                 }
-                if (checkedButton.getText().equals("16 x 16")) // Checks if it was the 16 x 16 button
+                if (checkedButton.getText().equals("14 x 14")) // Checks if it was the 14 x 14 button
                 {
-                    gridSize = 16; // Sets the grid size to 16
+                    // Save the gridSize as a shared preference to the default XML file:
+                    editor.putInt("gridSize", 14);
+                    editor.commit();
                 }
-                if (checkedButton.getText().equals("24 x 24")) // Checks if it was the 24 x 24 button
+                if (checkedButton.getText().equals("18 x 18")) // Checks if it was the 18 x 18 button
                 {
-                    gridSize = 24; // Sets the grid size to 24
+                    // Save the gridSize as a shared preference to the default XML file:
+                    editor.putInt("gridSize", 18);
+                    editor.commit();
                 }
-                Log.i("Info", "The grid size is: " + gridSize);
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) { // Menu bar
+        getMenuInflater().inflate(R.menu.menu_bar_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item ) { //Menu bar options
+        if (item.getItemId() == R.id.action_startmenu) {
+            // Exit to start menu if user selects the start menu option from the app bar:
+            // TODO: Add code to warn the user that returning to the start menu will reset any game currently being played
+            Intent intent = new Intent (this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (item.getItemId() == R.id.action_playgame) {
+            //Go to game activity if user selects play game option from the app bar:
+            // TODO: See above about ensuring that 1) the game state is saved and 2) only warning the user about resizing the board if a game is in progress
+            Intent intent = new Intent (this, GameActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

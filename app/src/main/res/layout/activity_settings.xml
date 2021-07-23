@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <!-- Replaced by the app bar menu
+     <Button
         android:id="@+id/returnToMainMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
         android:text="@string/returnToMainMenuButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" /> -->
 
     <RadioGroup
         android:id="@+id/gridSizeRadioGroup"
@@ -48,16 +49,16 @@
             android:text="@string/tenByTen" />
 
         <RadioButton
-            android:id="@+id/sixteenBySixteen"
+            android:id="@+id/fourteenByFourteen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sixteenBySixteen" />
+            android:text="@string/fourteenByFourteen" />
 
         <RadioButton
-            android:id="@+id/twentyFourByTwentyFour"
+            android:id="@+id/eighteenByEighteen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/twentyFourByTwentyFour" />
+            android:text="@string/eighteenByEighteen" />
 
     </RadioGroup>
 
