@@ -82,21 +82,19 @@ public class SettingsActivity extends AppCompatActivity
                 {
                     // Save the gridSize as a shared preference to the default XML file:
                     editor.putInt("gridSize", 10);
-                    editor.commit();
-
                 }
                 if (checkedButton.getText().equals("14 x 14")) // Checks if it was the 14 x 14 button
                 {
                     // Save the gridSize as a shared preference to the default XML file:
                     editor.putInt("gridSize", 14);
-                    editor.commit();
                 }
                 if (checkedButton.getText().equals("18 x 18")) // Checks if it was the 18 x 18 button
                 {
                     // Save the gridSize as a shared preference to the default XML file:
                     editor.putInt("gridSize", 18);
-                    editor.commit();
                 }
+                editor.putBoolean("sizeChanged", true); //They checked a button; the board size has been changed
+                editor.apply();
             }
         });
     }

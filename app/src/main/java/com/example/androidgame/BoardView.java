@@ -17,7 +17,7 @@ public class BoardView extends View { //Custom View Class
 
     //2D ArrayList where each inner list represents a row of grid squares:
     public ArrayList<ArrayList<ShapeDrawable>> floodGrid = new ArrayList<ArrayList<ShapeDrawable>>();
-    int gridSize = 14; //gridSize is 14 by default
+    int gridSize = 10; //gridSize is 10 by default
     //Color values as strings so we can use parseColor method to set each square's color:
     String colorGreen = "#FF00D500";
     String colorBlue = "#FF0C0CC0";
@@ -80,17 +80,13 @@ public class BoardView extends View { //Custom View Class
         }
     }
 
-    public ArrayList<ArrayList<ShapeDrawable>> getFloodGrid() { //Should allow us to get a reference to each board square
-        return floodGrid;
-    }
-
     public void setGridSize(int size) { //Updates the grid size; creates new grid
         gridSize = size; //Update size
         floodGrid.clear(); //Clear the existing grid
 
         int x; //Upper left-hand corner x-coordinate
         int y = 0; //Upper right-hand corner y-coordinate
-       //Default width and height (60 * 14 = 840):
+        //Default width and height (60 * 14 = 840):
         int width = 84;
         int height = 84;
 
@@ -116,11 +112,14 @@ public class BoardView extends View { //Custom View Class
                 //Set the square color according to the random number generated:
                 if (randNum == 0) { //Set color to green
                     drawable.getPaint().setColor(Color.parseColor(colorGreen));
-                } else if (randNum == 1) { //Set color to blue
+                }
+                else if (randNum == 1) { //Set color to blue
                     drawable.getPaint().setColor(Color.parseColor(colorBlue));
-                } else if (randNum == 2) { //Set color to yellow
+                }
+                else if (randNum == 2) { //Set color to yellow
                     drawable.getPaint().setColor(Color.parseColor(colorYellow));
-                } else { //Set color to red
+                }
+                else { //Set color to red
                     drawable.getPaint().setColor(Color.parseColor(colorRed));
                 }
 
@@ -144,17 +143,59 @@ public class BoardView extends View { //Custom View Class
     public void setSquareColor(int row, int column, String newColor) { //Function to set the square color for any given square
         floodGrid.get(row).get(column).getPaint().setColor(Color.parseColor(newColor));
 
-        //Could combine this function with detColorMatch method to
-        // change the color & return true if a match
-        // return false if not a match.
     }
 
-    public boolean detColorMatch(int row, int column, String color) { //Function to determine if the given color [flood color] matches the color of a given square
-        if (getSquareColor(row, column).equals(color)) {
-            return true;
-        } 
-        else {
-            return false;
+    public String getProgress() { //Function to retrieve the progress on the board
+        //Progress on the board is saved as a string where each char represents
+        // the color of the corresponding square in the grid.
+        StringBuilder boardProgress = new StringBuilder();
+        String c;
+        char v;
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                c = getSquareColor(i, j);
+                if (c.equals(colorGreen)) { //Green
+                    v = 'G';
+                }
+                else if (c.equals(colorBlue)) { //Blue
+                    v = 'B';
+                }
+                else if (c.equals(colorYellow)) { //Yellow
+                    v = 'Y';
+                }
+                else { //Red
+                    v = 'R';
+                }
+                boardProgress.append(v);
+            }
+        }
+        return boardProgress.toString();
+    }
+
+    public void setProgress(String boardProgress) { //Function to set the progress on the board
+        //Progress on the board is saved as a string where each char represents
+        // the color of the corresponding square in the grid. The string can be
+        // 'decoded' to set the saved progress on the board.
+        char c;
+        int index = 0;
+        Log.i("debug", "DEBUGGING: inside setProgress gridSize: " + gridSize);
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                c = boardProgress.charAt(index);
+                index++;
+                if (c == 'G') { //Green
+                    setSquareColor(i, j, colorGreen);
+                }
+                else if (c == 'B') { //Blue
+                    setSquareColor(i, j, colorBlue);
+                }
+                else if (c == 'Y') { //Yellow
+                    setSquareColor(i, j, colorYellow);
+                }
+                else { //Red
+                    setSquareColor(i, j, colorRed);
+                }
+            }
         }
     }
 }

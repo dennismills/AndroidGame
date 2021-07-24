@@ -3,7 +3,6 @@ package com.example.androidgame;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
 
+    //Visible elements & related variables:
     private BoardView BoardView;
     private Button blueButton;
     private Button greenButton;
@@ -29,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView turnsRemainingText;
     private String stringRepOfTurnsRemaining;
 
-    int gridSize = 10;
+    //Variables necessary to running the game play:
     private int numberOfTurns;
     private int turnsRemaining;
     private boolean hasWon = false;
@@ -40,7 +40,9 @@ public class GameActivity extends AppCompatActivity {
     String colorYellow = "#FFFFF700";
     String colorRed = "#FFFF0000";
 
-    SharedPreferences sharedPref;
+    SharedPreferences sharedPref; // Shared preferences object
+    SharedPreferences.Editor editor; //Shared preferences editor object
+
 
     /**
      * @desc:
@@ -101,6 +103,135 @@ public class GameActivity extends AppCompatActivity {
         floodFill(x, y - 1, oldColor, newColor); // Recursively fills below
     }
 
+    /**
+     * @desc: This function resets the state of the game. It should always be called to
+     *  reset the game and also should always be called if the gridSize has been changed
+     *  in the settings. This function will get the gridSize from the shared preferences
+     *  and reset the BoardView accordingly, it will display the gridSize, it will reset
+     *  the total number of turns and the number of turns remaining according the the
+     *  gridSize, and it will save the new game state in the shared preferences.
+     */
+    public void resetGame() { //Always called to reset game or if the board size has changed
+        //Check the shared preferences to get the board size:
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        BoardView.setGridSize(sharedPref.getInt("gridSize", 10));
+        BoardView.invalidate(); //Redraws grid after changes
+
+        //Display the grid size:
+        if (BoardView.gridSize == 10) {
+            gridSizeDisplay.setText(R.string.tenByTen);
+        } else if (BoardView.gridSize == 14) {
+            gridSizeDisplay.setText(R.string.fourteenByFourteen);
+        } else if (BoardView.gridSize == 18) {
+            gridSizeDisplay.setText(R.string.eighteenByEighteen);
+        }
+
+        //Set the number of turns & the number of turns remaining:
+        switch (BoardView.gridSize) {
+            case 14:
+                numberOfTurns = 16;
+                turnsRemaining = numberOfTurns;
+                break;
+            case 18:
+                numberOfTurns = 21;
+                turnsRemaining = numberOfTurns;
+                break;
+            default: //Covers gridSize == 10
+                numberOfTurns = 11;
+                turnsRemaining = numberOfTurns;
+                break;
+        }
+
+        saveGame(); //Saved the reset game
+        // (prevents out-of-bounds exception in BoardView.setProgress())
+    }
+
+    /**
+     * @desc: This function will save the game state in the shared preferences.
+     */
+public void saveGame() {
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPref.edit();
+
+        //Save the board size, the number of turns remaining. and the board progress:
+        editor.putInt("gridSize", BoardView.gridSize);
+        editor.putInt("turnsRemaining", turnsRemaining);
+        String progress = BoardView.getProgress();
+        Log.i("debug", "DEBUGGING: getProgress string returned in saveGame: " + progress);
+        editor.putString("boardProgress", progress);
+        editor.apply();
+    }
+
+    /**
+     * @desc: This function will load a saved game from the shared preferences.
+     */
+    public void loadGame() {
+        //TODO: Fix this bug - when a saved game is loaded, the turns remaining display is not updating immediately.
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Get the board size (if the board size is changed in the settings, resetGame will be called -
+        // checking the board size here just ensures nothing weird happens with the drawable).
+        BoardView.setGridSize(sharedPref.getInt("gridSize", 10));
+
+        //Determine the number of turns:
+        switch (BoardView.gridSize) {
+            case 14:
+                numberOfTurns = 16;
+                break;
+            case 18:
+                numberOfTurns = 21;
+                break;
+            default: //Covers gridSize == 10
+                numberOfTurns = 11;
+                break;
+        }
+
+        //Get the number of turns remaining:
+        turnsRemaining = sharedPref.getInt("turnsRemaining", turnsRemaining);
+
+        //Get the board progress:
+        String boardProgress = sharedPref.getString("boardProgress", "RESET");
+        if (boardProgress.equals("RESET")) { //If default value is returned, board progress was not saved. Must reset.
+            turnsRemaining = numberOfTurns; //Turns remaining = total number of turns
+            Log.i("debug", "DEBUGGING: loadGame triggered reset");
+        }
+        else {
+            BoardView.setProgress(boardProgress);
+        }
+
+        BoardView.invalidate(); //Redraws grid after changes
+    }
+
+    /**
+     * @desc: This function checks the settings to see if the gridSize has been changed and
+     * to see if a saved game exists. This function should be called whenever the activity
+     * is created or resumed to ensure 1) checking the settings for a gridSize change and
+     * 2) checking the settings for an existing game.
+     */
+    public void checkSettings() {
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPref.edit();
+
+        boolean sizeChanged = sharedPref.getBoolean("sizeChanged", true);
+        boolean sizeSame = !sizeChanged; //Opposite of sizeChanged
+        int savedTurns = sharedPref.getInt("turnsRemaining", 0);
+
+        if (sizeChanged) { //If the board size has been changed in the settings, always reset the game.
+            resetGame();
+            editor.putBoolean("sizeChanged", false); //Unmark the indicator the size was changed
+            editor.apply();
+        }
+        else if (sizeSame && (savedTurns > 0)) { //If the board size hasn't changed, and a game is saved with more than 0 turns remaining, load the game
+            Log.i("debug", "DEBUGGING: Game loaded; size not changed in checkSettings()");
+            loadGame();
+        }
+        else { //Otherwise reset
+            Log.i("debug", "DEBUGGING: Game reset; size not changed in checkSettings()");
+            resetGame();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,34 +244,20 @@ public class GameActivity extends AppCompatActivity {
         yellowButton = findViewById(R.id.yellowButton);
         gridSizeDisplay = findViewById(R.id.gridSizeDisplay);
 
-        //Check the shared preferences for the grid size:
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        gridSize = sharedPref.getInt("gridSize", 10);
-        BoardView.setGridSize(gridSize);
-        BoardView.invalidate(); //Redraws grid after changes
-        //Display grid size text according to the size:
-        if (gridSize == 10) {
-            gridSizeDisplay.setText(R.string.tenByTen);
-        }
-        else if (gridSize == 14) {
-            gridSizeDisplay.setText(R.string.fourteenByFourteen);
-        }
-        else if (gridSize == 18) {
-            gridSizeDisplay.setText(R.string.eighteenByEighteen);
-        }
+        /*  Check if there is a saved game (loads the game data):
+                checkSettings() will check for a gridSize changed and an
+                existing game in the shared preferences - if no game is
+                saved a 'default' game will be loaded via a call to resetGame().
+         */
+        checkSettings();
 
-        //Determine and set the starting number of allocated turns:
-        switch (BoardView.gridSize)
-        {
-            // TODO: Add the other grid sizes and the number of turns for each of them
-            case 14:
-                numberOfTurns = 11;
-                turnsRemaining = numberOfTurns;
-                break;
-            default:
-                numberOfTurns = 11;
-                turnsRemaining = numberOfTurns;
-                break;
+        //Display the grid size:
+        if (BoardView.gridSize == 10) {
+            gridSizeDisplay.setText(R.string.tenByTen);
+        } else if (BoardView.gridSize == 14) {
+            gridSizeDisplay.setText(R.string.fourteenByFourteen);
+        } else if (BoardView.gridSize == 18) {
+            gridSizeDisplay.setText(R.string.eighteenByEighteen);
         }
 
         //Display the starting number of allocated turns:
@@ -179,6 +296,7 @@ public class GameActivity extends AppCompatActivity {
                     turnsRemainingText.setText(stringRepOfTurnsRemaining);
                 }
                 BoardView.invalidate(); //Redraws grid after changes
+                saveGame(); //Save game after changes
             }
         });
 
@@ -207,6 +325,7 @@ public class GameActivity extends AppCompatActivity {
                     turnsRemainingText.setText(stringRepOfTurnsRemaining);
                 }
                 BoardView.invalidate(); //Redraws grid after changes
+                saveGame(); //Save game after changes
             }
         });
 
@@ -235,6 +354,7 @@ public class GameActivity extends AppCompatActivity {
                     turnsRemainingText.setText(stringRepOfTurnsRemaining);
                 }
                 BoardView.invalidate(); //Redraws grid after changes
+                saveGame(); //Save game after changes
             }
         });
 
@@ -263,33 +383,20 @@ public class GameActivity extends AppCompatActivity {
                     turnsRemainingText.setText(stringRepOfTurnsRemaining);
                 }
                 BoardView.invalidate(); //Redraws grid after changes
+                saveGame(); //Save game after changes
             }
         });
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        gridSize = sharedPref.getInt("gridSize", 10);
-        BoardView.setGridSize(gridSize);
-        BoardView.invalidate(); //Redraws grid after changes
-        if (gridSize == 10) {
-            gridSizeDisplay.setText(R.string.tenByTen);
-        }
-        else if (gridSize == 14) {
-            gridSizeDisplay.setText(R.string.fourteenByFourteen);
-        }
-        else if (gridSize == 18) {
-            gridSizeDisplay.setText(R.string.eighteenByEighteen);
-        }
-
+        checkSettings();
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { //Inflates the menu
         getMenuInflater().inflate(R.menu.menu_bar_game, menu);
         return true;
     }
@@ -297,8 +404,9 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item ) {
         if (item.getItemId() == R.id.action_settings) {
+            //Save the game:
+            saveGame();
             //Open settings if user selects the settings option from the app bar:
-            //TODO: Add code to save the game state; game will be reset if user changes the board size in the settings
             Intent intent = new Intent (this, SettingsActivity.class);
             startActivity(intent);
             return true;
@@ -310,7 +418,6 @@ public class GameActivity extends AppCompatActivity {
             return true;
         }
 
-        //Log.d("OnOptionsItemSelected", "Returning False"); //Debugging
         return super.onOptionsItemSelected(item);
     }
 }
