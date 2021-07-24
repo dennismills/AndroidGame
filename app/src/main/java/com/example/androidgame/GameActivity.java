@@ -141,6 +141,9 @@ public class GameActivity extends AppCompatActivity {
                 turnsRemaining = numberOfTurns;
                 break;
         }
+        
+        //Update displays:
+        updateDisplays();
 
         saveGame(); //Saved the reset game
         // (prevents out-of-bounds exception in BoardView.setProgress())
@@ -157,7 +160,6 @@ public void saveGame() {
         editor.putInt("gridSize", BoardView.gridSize);
         editor.putInt("turnsRemaining", turnsRemaining);
         String progress = BoardView.getProgress();
-        Log.i("debug", "DEBUGGING: getProgress string returned in saveGame: " + progress);
         editor.putString("boardProgress", progress);
         editor.apply();
     }
@@ -166,8 +168,6 @@ public void saveGame() {
      * @desc: This function will load a saved game from the shared preferences.
      */
     public void loadGame() {
-        //TODO: Fix this bug - when a saved game is loaded, the turns remaining display is not updating immediately.
-
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         //Get the board size (if the board size is changed in the settings, resetGame will be called -
@@ -189,6 +189,9 @@ public void saveGame() {
 
         //Get the number of turns remaining:
         turnsRemaining = sharedPref.getInt("turnsRemaining", turnsRemaining);
+        
+        //Update displays:
+        updateDisplays();
 
         //Get the board progress:
         String boardProgress = sharedPref.getString("boardProgress", "RESET");
@@ -231,6 +234,27 @@ public void saveGame() {
             resetGame();
         }
     }
+    
+    public void updateDisplays() {
+        //Display the grid size:
+        if (BoardView.gridSize == 10) {
+            gridSizeDisplay.setText(R.string.tenByTen);
+        } else if (BoardView.gridSize == 14) {
+            gridSizeDisplay.setText(R.string.fourteenByFourteen);
+        } else if (BoardView.gridSize == 18) {
+            gridSizeDisplay.setText(R.string.eighteenByEighteen);
+        }
+
+        //Display the starting number of allocated turns:
+        numberOfAllocatedTurns = findViewById(R.id.totTurnsDisplay);
+        stringRepOfAllocatedTurns = "" + numberOfTurns;
+        numberOfAllocatedTurns.setText(stringRepOfAllocatedTurns);
+
+        //Display the number of remaining turns:
+        turnsRemainingText = findViewById(R.id.numTurnsDisplay);
+        stringRepOfTurnsRemaining = "" + turnsRemaining;
+        turnsRemainingText.setText(stringRepOfTurnsRemaining);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,25 +274,6 @@ public void saveGame() {
                 saved a 'default' game will be loaded via a call to resetGame().
          */
         checkSettings();
-
-        //Display the grid size:
-        if (BoardView.gridSize == 10) {
-            gridSizeDisplay.setText(R.string.tenByTen);
-        } else if (BoardView.gridSize == 14) {
-            gridSizeDisplay.setText(R.string.fourteenByFourteen);
-        } else if (BoardView.gridSize == 18) {
-            gridSizeDisplay.setText(R.string.eighteenByEighteen);
-        }
-
-        //Display the starting number of allocated turns:
-        numberOfAllocatedTurns = findViewById(R.id.totTurnsDisplay);
-        stringRepOfAllocatedTurns = "" + numberOfTurns;
-        numberOfAllocatedTurns.setText(stringRepOfAllocatedTurns);
-
-        //Display the number of remaining turns:
-        turnsRemainingText = findViewById(R.id.numTurnsDisplay);
-        stringRepOfTurnsRemaining = "" + numberOfTurns;
-        turnsRemainingText.setText(stringRepOfTurnsRemaining);
 
         //Buttons run the game; when a user picks a color button, they are flooding the board with that color.
         blueButton.setOnClickListener(new View.OnClickListener() {
@@ -402,8 +407,13 @@ public void saveGame() {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item ) {
-        if (item.getItemId() == R.id.action_settings) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item ) { //Handles menu actions
+        if (item.getItemId() == R.id.action_newgame) {
+            //Reset the game if the user selects the new game option from the app bar:
+            resetGame();
+            return true;
+        }
+        else if (item.getItemId() == R.id.action_settings) {
             //Save the game:
             saveGame();
             //Open settings if user selects the settings option from the app bar:
