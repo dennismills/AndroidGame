@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_startmenu"
+        android:title="@string/action_startmenu"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_playgame"
+        android:title="@string/action_playgame"
+        app:showAsAction="ifRoom"/>
+
+</menu>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AndroidGame</string>
+    <string name="playButton">Play</string>
+    <string name="settingsButton">Settings</string>
+    <string name="quitButton">Quit</string>
+    <string name="settingsHeader">Settings</string>
+    <string name="returnToMainMenuButton">Return To Main Menu</string>
+    <string name="gridSizeHeader">Grid Size</string>
+    <string name="tenByTen">10 x 10</string>
+    <string name="fourteenByFourteen">14 x 14</string>
+    <string name="eighteenByEighteen">18 x 18</string>
+    
+    <string name="num_turns_label">Turns Remaining:</string>
+    <string name="tot_turns_label">Turns Allotted:</string>
+    <string name="grid_size_label">Current Board Size:</string>
+    
+    <string name="action_startmenu">Return to Start Menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_playgame">Play Game</string>
+    <string name="action_newgame">New Game</string>
+
+    <string name="resize_warning">Warning</string>
+    <string name="resize_warning_message">If you change the board size, any game in progress will be reset.</string>
+    <string name="ok">Okay</string>
+    <string name="youTextBox">"You "</string>
+    <string name="gameStatusText"> </string>
+    <string name="theGameText">" the game!"</string>
+    <string name="resetGameButton">Reset Game</string>
+    <string name="mainMenuButton">Return to Main Menu</string>
+</resources>
