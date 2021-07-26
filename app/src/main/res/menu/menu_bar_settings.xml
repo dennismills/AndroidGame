@@ -8,6 +8,6 @@
 
     <item android:id="@+id/action_playgame"
         android:title="@string/action_playgame"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>

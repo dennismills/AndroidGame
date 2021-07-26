@@ -178,7 +178,6 @@ public class BoardView extends View { //Custom View Class
         // 'decoded' to set the saved progress on the board.
         char c;
         int index = 0;
-        Log.i("debug", "DEBUGGING: inside setProgress gridSize: " + gridSize);
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 c = boardProgress.charAt(index);
