@@ -22,10 +22,10 @@ public class SettingsActivity extends AppCompatActivity {
     //Visible elements:
     private RadioGroup gridSizeSelection;
     private Switch soundSelection;
-    ImageView boxBlueView;
-    ImageView boxGreenView;
-    ImageView boxRedView;
-    ImageView boxYellowView;
+    private ImageView boxBlueView;
+    private ImageView boxGreenView;
+    private ImageView boxRedView;
+    private ImageView boxYellowView;
 
     SharedPreferences sharedPref; //Shared preferences object
     SharedPreferences.Editor editor; //Shared preferences editor object
