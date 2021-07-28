@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="43dp"
+        android:text="@string/playButton"
+        app:layout_constraintBottom_toTopOf="@+id/settingsButton"
+        app:layout_constraintStart_toStartOf="@+id/settingsButton"
+        app:layout_constraintTop_toBottomOf="@+id/blueBox2" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="251dp"
+        android:text="@string/settingsButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/blueBox3"
+        app:layout_constraintStart_toEndOf="@+id/blueBox4" />
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="165dp"
+        android:layout_height="78dp"
+        android:capitalize="none"
+        android:text="@string/app_name"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/yellowBox1"
+        app:layout_constraintEnd_toStartOf="@+id/redBox1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/redBox2"
+        app:layout_constraintTop_toBottomOf="@+id/yellowBox2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/blueBox1"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/redBox2"
+        app:layout_constraintEnd_toStartOf="@+id/redBox3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/box_blue" />
+
+    <ImageView
+        android:id="@+id/greenBox1"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/yellowBox3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/yellowBox2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/box_green" />
+
+    <ImageView
+        android:id="@+id/redBox1"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/blueBox2"
+        app:layout_constraintTop_toBottomOf="@+id/yellowBox3"
+        app:srcCompat="@drawable/box_red" />
+
+    <ImageView
+        android:id="@+id/yellowBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/blueBox2"
+        app:layout_constraintStart_toEndOf="@+id/greenBox2"
+        app:layout_constraintTop_toBottomOf="@+id/titleView"
+        app:srcCompat="@drawable/box_yellow" />
+
+    <ImageView
+        android:id="@+id/blueBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/redBox1"
+        app:layout_constraintStart_toEndOf="@+id/yellowBox1"
+        app:layout_constraintTop_toBottomOf="@+id/titleView"
+        app:srcCompat="@drawable/box_blue" />
+
+    <ImageView
+        android:id="@+id/greenBox2"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/yellowBox1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/redBox2"
+        app:srcCompat="@drawable/box_green" />
+
+    <ImageView
+        android:id="@+id/redBox2"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/greenBox2"
+        app:layout_constraintEnd_toStartOf="@+id/titleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blueBox1"
+        app:srcCompat="@drawable/box_red" />
+
+    <ImageView
+        android:id="@+id/yellowBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/titleView"
+        app:layout_constraintEnd_toStartOf="@+id/greenBox1"
+        app:layout_constraintStart_toEndOf="@+id/redBox3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/box_yellow" />
+
+    <ImageView
+        android:id="@+id/redBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/titleView"
+        app:layout_constraintEnd_toStartOf="@+id/yellowBox2"
+        app:layout_constraintStart_toEndOf="@+id/blueBox1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/box_red" />
+
+    <ImageView
+        android:id="@+id/yellowBox3"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/redBox1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toEndOf="@+id/titleView"
+        app:layout_constraintTop_toBottomOf="@+id/greenBox1"
+        app:srcCompat="@drawable/box_yellow" />
+
+    <ImageView
+        android:id="@+id/blueBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greenBox3"
+        app:srcCompat="@drawable/box_blue" />
+
+    <ImageView
+        android:id="@+id/greenBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/redBox1"
+        app:srcCompat="@drawable/box_green" />
+
+    <ImageView
+        android:id="@+id/redBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/greenBox5"
+        app:layout_constraintTop_toBottomOf="@+id/yellowBox4"
+        app:srcCompat="@drawable/box_red" />
+
+    <ImageView
+        android:id="@+id/yellowBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blueBox3"
+        app:srcCompat="@drawable/box_yellow" />
+
+    <ImageView
+        android:id="@+id/blueBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yellowBox5"
+        app:srcCompat="@drawable/box_blue" />
+
+    <ImageView
+        android:id="@+id/redBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greenBox4"
+        app:srcCompat="@drawable/box_red" />
+
+    <ImageView
+        android:id="@+id/greenBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blueBox4"
+        app:srcCompat="@drawable/box_green" />
+
+    <ImageView
+        android:id="@+id/yellowBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greenBox2"
+        app:srcCompat="@drawable/box_yellow" />
+
+    <ImageView
+        android:id="@+id/blueBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/greenBox5"
+        app:layout_constraintStart_toEndOf="@+id/redBox5"
+        app:layout_constraintTop_toBottomOf="@+id/greenBox4"
+        app:srcCompat="@drawable/box_blue" />
+
+    <ImageView
+        android:id="@+id/greenBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/redBox4"
+        app:layout_constraintStart_toEndOf="@+id/blueBox5"
+        app:layout_constraintTop_toBottomOf="@+id/yellowBox4"
+        app:srcCompat="@drawable/box_green" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
