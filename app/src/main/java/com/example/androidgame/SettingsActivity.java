@@ -46,6 +46,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPref.edit();
+        
+        //Show dialog warning user that resizing will result in any game being played being reset:
+        ResizeWarningDialog dialog = new ResizeWarningDialog();
+        dialog.show(getSupportFragmentManager(), "");
 
         //Loading animations:
         Animation box1Anim = AnimationUtils.loadAnimation(this, R.anim.box1_anim);
