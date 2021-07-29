@@ -136,6 +136,8 @@ public class GameActivity extends AppCompatActivity {
      * @desc: This function will save the game state in the shared preferences.
      */
 public void saveGame() {
+        /* Use the Preference Manager to open the default shared preference file,
+            then create an editor: */
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPref.edit();
 
@@ -151,6 +153,7 @@ public void saveGame() {
      * @desc: This function will load a saved game from the shared preferences.
      */
     public void loadGame() {
+        //Use the Preference Manager to open the default shared preference file:
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         /* Get the board size (if the board size has changed in the settings,
@@ -197,6 +200,8 @@ public void saveGame() {
      * 2) checking the settings for an existing game.
      */
     public void checkSettings() {
+        /* Use the Preference Manager to open the default shared preference file,
+            then create an editor: */
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPref.edit();
 
