@@ -44,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
         boxRedView = findViewById(R.id.boxRed);
         boxYellowView = findViewById(R.id.boxYellow);
 
+        /* Use the Preference Manager to open the default shared preference file,
+            then create an editor: */
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPref.edit();
         
