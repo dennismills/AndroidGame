@@ -17,7 +17,7 @@
     <string name="action_playgame">Play Game</string>
     <string name="action_newgame">New Game</string>
     <string name="resize_warning">Warning</string>
-    <string name="resize_warning_message">If you change the board size, any game in progress will be reset.</string>
+    <string name="resize_warning_message">If you change the grid size, any game in progress will be reset.</string>
     <string name="ok">Okay</string>
     <string name="tenByTenTurnsLabel">10 x 10 Size - 13 turns</string>
     <string name="fourteenByFourteenTurnsLabel">14 x 14 Size - 18 turns</string>
