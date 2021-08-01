@@ -107,7 +107,7 @@ public class BoardView extends View { //Custom View Class
      * @param size: New size.
      */
     public void setGridSize(int size) {
-        gridSize = size; //Update size from paramter
+        gridSize = size; //Update size from parameter
         floodGrid.clear(); //Clear the existing grid
 
         int x; //Upper left-hand corner x-coordinate
