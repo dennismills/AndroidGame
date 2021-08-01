@@ -71,7 +71,6 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="600dp"
         android:backgroundTint="@color/gridBlue"
-        app:iconTint="@color/gridBlue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
