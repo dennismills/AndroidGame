@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
      *  remaining according to the gridSize, and it will save the new game state in the
      *  shared preferences.
      */
-    public void resetGame() { //Always called to reset game or if the board size has changed
+    public void resetGame() {
         //Check the shared preferences to get the board size:
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         BoardView.setGridSize(sharedPref.getInt("gridSize", 10));
